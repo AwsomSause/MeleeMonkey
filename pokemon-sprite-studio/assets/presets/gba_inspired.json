@@ -1,0 +1,14 @@
+{
+  "name": "GBA-inspired",
+  "description": "Original profile inspired by 32-bit handheld-era battle sprites: small canvas, limited palette, dark outlines, flat 2-3 tone shading.",
+  "battle_canvas": [64, 64],
+  "overworld_tile": [32, 32],
+  "icon_canvas": [32, 32],
+  "max_colors": 16,
+  "outline": "dark",
+  "shading": "2-3 tones, light from top-left",
+  "pixel_clusters": "clean",
+  "detail_level": "low",
+  "anchor": "bottom_center",
+  "animation": {"default_frame_ms": 100, "max_frames_idle": 4}
+}
