@@ -1,0 +1,290 @@
+{
+  "$defs": {
+    "Anatomy": {
+      "additionalProperties": false,
+      "properties": {
+        "silhouette": {
+          "default": "",
+          "title": "Silhouette",
+          "type": "string"
+        },
+        "proportions": {
+          "default": "",
+          "title": "Proportions",
+          "type": "string"
+        },
+        "head_shape": {
+          "default": "",
+          "title": "Head Shape",
+          "type": "string"
+        },
+        "eyes": {
+          "default": "",
+          "title": "Eyes",
+          "type": "string"
+        },
+        "limbs": {
+          "default": "",
+          "title": "Limbs",
+          "type": "string"
+        },
+        "markings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Markings",
+          "type": "array"
+        },
+        "accessories": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accessories",
+          "type": "array"
+        },
+        "texture": {
+          "default": "",
+          "title": "Texture",
+          "type": "string"
+        }
+      },
+      "title": "Anatomy",
+      "type": "object"
+    },
+    "IdentityConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "preserve_silhouette": {
+          "default": true,
+          "title": "Preserve Silhouette",
+          "type": "boolean"
+        },
+        "preserve_facial_identity": {
+          "default": true,
+          "title": "Preserve Facial Identity",
+          "type": "boolean"
+        },
+        "preserve_body_proportions": {
+          "default": true,
+          "title": "Preserve Body Proportions",
+          "type": "boolean"
+        },
+        "preserve_markings": {
+          "default": true,
+          "title": "Preserve Markings",
+          "type": "boolean"
+        },
+        "preserve_palette": {
+          "default": false,
+          "title": "Preserve Palette",
+          "type": "boolean"
+        }
+      },
+      "title": "IdentityConstraints",
+      "type": "object"
+    },
+    "MovementClass": {
+      "enum": [
+        "quadruped",
+        "biped",
+        "flying",
+        "floating",
+        "serpentine",
+        "aquatic",
+        "insectoid",
+        "heavy",
+        "mechanical"
+      ],
+      "title": "MovementClass",
+      "type": "string"
+    },
+    "PaletteColor": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "hex": {
+          "title": "Hex",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "hex"
+      ],
+      "title": "PaletteColor",
+      "type": "object"
+    },
+    "StyleDirectives": {
+      "additionalProperties": false,
+      "properties": {
+        "preset": {
+          "default": "custom",
+          "title": "Preset",
+          "type": "string"
+        },
+        "outline": {
+          "default": "dark",
+          "enum": [
+            "none",
+            "dark",
+            "colored",
+            "selective"
+          ],
+          "title": "Outline",
+          "type": "string"
+        },
+        "pixel_clusters": {
+          "default": "clean",
+          "enum": [
+            "clean",
+            "textured",
+            "dithered"
+          ],
+          "title": "Pixel Clusters",
+          "type": "string"
+        },
+        "shading": {
+          "default": "",
+          "title": "Shading",
+          "type": "string"
+        },
+        "max_colors": {
+          "anyOf": [
+            {
+              "maximum": 256,
+              "minimum": 2,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Colors"
+        }
+      },
+      "title": "StyleDirectives",
+      "type": "object"
+    },
+    "VisualChanges": {
+      "additionalProperties": false,
+      "description": "Differences from the parent form. Empty for a base form.",
+      "properties": {
+        "palette": {
+          "default": "",
+          "title": "Palette",
+          "type": "string"
+        },
+        "aura": {
+          "default": "",
+          "title": "Aura",
+          "type": "string"
+        },
+        "eyes": {
+          "default": "",
+          "title": "Eyes",
+          "type": "string"
+        },
+        "shading": {
+          "default": "",
+          "title": "Shading",
+          "type": "string"
+        },
+        "anatomy": {
+          "default": "",
+          "title": "Anatomy",
+          "type": "string"
+        },
+        "other": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Other",
+          "type": "array"
+        }
+      },
+      "title": "VisualChanges",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "species": {
+      "minLength": 1,
+      "title": "Species",
+      "type": "string"
+    },
+    "form": {
+      "default": "base",
+      "title": "Form",
+      "type": "string"
+    },
+    "parent_form": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Form"
+    },
+    "movement_classes": {
+      "items": {
+        "$ref": "#/$defs/MovementClass"
+      },
+      "title": "Movement Classes",
+      "type": "array"
+    },
+    "identity": {
+      "$ref": "#/$defs/IdentityConstraints"
+    },
+    "anatomy": {
+      "$ref": "#/$defs/Anatomy"
+    },
+    "palette": {
+      "items": {
+        "$ref": "#/$defs/PaletteColor"
+      },
+      "title": "Palette",
+      "type": "array"
+    },
+    "visual_changes": {
+      "$ref": "#/$defs/VisualChanges"
+    },
+    "style": {
+      "$ref": "#/$defs/StyleDirectives"
+    },
+    "negative_constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Negative Constraints",
+      "type": "array"
+    },
+    "deliverables": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Deliverables",
+      "type": "array"
+    }
+  },
+  "required": [
+    "species"
+  ],
+  "title": "DesignSpec",
+  "type": "object",
+  "$id": "https://psas.local/schemas/design_spec.v1.json"
+}
